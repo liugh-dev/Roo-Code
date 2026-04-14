@@ -71,6 +71,13 @@ export interface ExtensionHostOptions {
 	provider: SupportedProvider
 	apiKey?: string
 	model: string
+	/** OpenAI custom provider options */
+	openAiOptions?: {
+		baseUrl?: string
+		headers?: Record<string, string>
+		azure?: boolean
+		azureApiVersion?: string
+	}
 	workspacePath: string
 	extensionPath: string
 	nonInteractive?: boolean
@@ -227,7 +234,12 @@ export class ExtensionHost extends EventEmitter implements ExtensionHostInterfac
 			experiments: {
 				customTools: true,
 			},
-			...getProviderSettings(this.options.provider, this.options.apiKey, this.options.model),
+			...getProviderSettings(
+				this.options.provider,
+				this.options.apiKey,
+				this.options.model,
+				this.options.openAiOptions,
+			),
 		}
 
 		this.initialSettings = this.options.nonInteractive

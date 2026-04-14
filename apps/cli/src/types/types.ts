@@ -4,6 +4,7 @@ import type { OutputFormat } from "./json-events.js"
 export const supportedProviders = [
 	"anthropic",
 	"openai-native",
+	"openai",
 	"gemini",
 	"openrouter",
 	"vercel-ai-gateway",
@@ -35,6 +36,9 @@ export type FlagOptions = {
 	provider?: SupportedProvider
 	model?: string
 	mode?: string
+	baseUrl?: string
+	azure: boolean
+	azureApiVersion?: string
 	terminalShell?: string
 	reasoningEffort?: ReasoningEffortFlagOptions
 	consecutiveMistakeLimit?: number

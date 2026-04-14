@@ -48,6 +48,9 @@ program
 	.option("--provider <provider>", "API provider (roo, anthropic, openai, openrouter, etc.)")
 	.option("-m, --model <model>", "Model to use", DEFAULT_FLAGS.model)
 	.option("--mode <mode>", "Mode to start in (code, architect, ask, debug, etc.)", DEFAULT_FLAGS.mode)
+	.option("--base-url <url>", "Base URL for the API (for openai provider)")
+	.option("--azure", "Use Azure OpenAI (for openai provider)", false)
+	.option("--azure-api-version <version>", "Azure API version (for openai provider with --azure)")
 	.option("--terminal-shell <path>", "Absolute path to shell executable for inline terminal commands")
 	.option(
 		"-r, --reasoning-effort <effort>",

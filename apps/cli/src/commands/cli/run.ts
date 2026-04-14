@@ -24,7 +24,7 @@ import { createClient } from "@/lib/sdk/index.js"
 import { loadToken, loadSettings } from "@/lib/storage/index.js"
 import { readWorkspaceTaskSessions, resolveWorkspaceResumeSessionId } from "@/lib/task-history/index.js"
 import { isRecord } from "@/lib/utils/guards.js"
-import { getEnvVarName, getApiKeyFromEnv } from "@/lib/utils/provider.js"
+import { getEnvVarName, getApiKeyFromEnv, getProviderSettings } from "@/lib/utils/provider.js"
 import { runOnboarding } from "@/lib/utils/onboarding.js"
 import { validateTerminalShellPath } from "@/lib/utils/shell.js"
 import { getDefaultExtensionPath } from "@/lib/utils/extension.js"
@@ -219,6 +219,14 @@ export async function run(promptArg: string | undefined, flagOptions: FlagOption
 		user: null,
 		provider: effectiveProvider,
 		model: effectiveModel,
+		openAiOptions:
+			effectiveProvider === "openai"
+				? {
+						baseUrl: flagOptions.baseUrl,
+						azure: flagOptions.azure,
+						azureApiVersion: flagOptions.azureApiVersion,
+					}
+				: undefined,
 		workspacePath: effectiveWorkspacePath,
 		extensionPath: path.resolve(flagOptions.extension || getDefaultExtensionPath(__dirname)),
 		nonInteractive: !effectiveRequireApproval,
